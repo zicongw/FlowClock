@@ -1,0 +1,56 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "storeFile": "/Users/wzc/Desktop/Deveco上架/FlowClock/Keys/FlowClock.p12",
+          "storePassword": "00000019DE32CE5145C7798E0F2E6F2CC5D8C0B297A4F3AFA7DF1ECC1891231BDE9CD038B3458A314F",
+          "keyAlias": "Flowing",
+          "keyPassword": "000000199EC3C27FFB3697ED16D0E4A529DFE73585812B43918FAD141C0F1DE391D6EE0575D5F25D84",
+          "signAlg": "SHA256withECDSA",
+          "profile": "/Users/wzc/Desktop/Deveco上架/FlowClock/Keys/FlowClockRelease.p7b",
+          "certpath": "/Users/wzc/Desktop/Deveco上架/FlowClock/Keys/FlowClock.cer"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "targetSdkVersion": "6.1.1(24)",
+        "compatibleSdkVersion": "6.1.1(24)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

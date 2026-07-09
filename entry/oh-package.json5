@@ -1,0 +1,25 @@
+//{
+//  "name": "entry",
+//  "version": "1.0.0",
+//  "description": "Please describe the basic information.",
+//  "main": "",
+//  "author": "",
+//  "license": "",
+//  "dependencies": {}
+//}
+//
+{
+  "name": "flowclock_entry",
+  "version": "1.0.0",
+  "description": "FlowClock专注计时模块",
+  "main": "",
+  "author": "",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "entry"
+  },
+  "dirs": {},
+  "scripts": {},
+  "devDependencies": {}
+}
