@@ -1,3 +1,4 @@
+//Home.ets
 import router from '@ohos.router';
 import { initStorage, getNumberFlow } from '../common/Storage';
 import common from '@ohos.app.ability.common';

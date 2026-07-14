@@ -1,3 +1,4 @@
+//Bug.ets
 import router from '@ohos.router';
 import type { common, Want } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
