@@ -4,6 +4,13 @@
     "pages/Main",
     "pages/TimerDown",
     "pages/TimerRoll",
-    "pages/Bugabout"
+    "pages/About",
+    "pages/Sleep",
+    "pages/Bug",
+    "pages/TimerDown_Director",
+    "pages/TimerDown_20",
+    "pages/TimerDown_30",
+    "pages/TimerDown_50",
+    "pages/LongBreak"
   ]
 }

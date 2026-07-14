@@ -4,12 +4,11 @@ import { addNumberFlow, getNumberFlow } from '../common/Storage';
 import { FadeSlideItem } from './FadeSlideItem';
 import { VibrateUtil } from '../common/VibrateUtil';
 
-
 @Entry
 @Component
 struct TimerDown {
-    @State totalSecond: number = 25 * 60;
-    @State remainSecond: number = 25 * 60;
+    @State totalSecond: number = 50 * 60;
+    @State remainSecond: number = 50 * 60;
     @State isRunning: boolean = false;
     @StorageLink("BreakCount") breakCount: number = 0
     private timerId: number = -1;
@@ -53,6 +52,7 @@ struct TimerDown {
                     .fontFamily('monospace')
                     .fontColor('#0F4441')
             }
+
             FadeSlideItem({delayMs: 400}) {
                 Row({ space: 30 }) {
                     Button() {

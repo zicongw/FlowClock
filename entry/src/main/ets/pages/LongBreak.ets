@@ -1,43 +1,59 @@
+// entry/src/main/ets/pages/LongBreak.ets
 import router from '@ohos.router';
 import promptAction from '@ohos.promptAction';
-import { addNumberFlow, getNumberFlow } from '../common/Storage';
 import { FadeSlideItem } from './FadeSlideItem';
 import { VibrateUtil } from '../common/VibrateUtil';
-
-
 @Entry
 @Component
-struct TimerDown {
-    @State totalSecond: number = 25 * 60;
-    @State remainSecond: number = 25 * 60;
+struct LongBreak {
+    @State totalSecond: number = 30 * 60;
+    @State remainSecond: number = 30 * 60;
     @State isRunning: boolean = false;
-    @StorageLink("BreakCount") breakCount: number = 0
+    @StorageLink("BreakCount") breakCount:number = 0
+    @StorageLink("FlowWays") flowWays: number = 0
+    //@StorageLink("BreakCount") breakCount: number = 0
     private timerId: number = -1;
     @State pageRefresh: number = 0
+
+    aboutToAppear() {
+        if(this.flowWays === 1){
+            this.totalSecond = 15*60
+            this.remainSecond = 15*60
+        }
+        if(this.flowWays === 2){
+            this.totalSecond = 25*60
+            this.remainSecond = 25*60
+        }
+        if(this.flowWays === 3){
+            this.totalSecond = 25*60
+            this.remainSecond = 25*60
+        }
+        if(this.flowWays === 4){
+            this.totalSecond = 30*60
+            this.remainSecond = 30*60
+        }
+    }
 
     pad(num: number): string {
         return num < 10 ? '0' + num : '' + num;
     }
 
-    async onPageShow() {
-        // 变更状态，强制所有子组件重建，重新播放淡入动画
-        this.pageRefresh += 1
-    }
+    addFocusCount() {
+        // 1. 获取当前值 (大写 Get)
+        let currentCount = AppStorage.Get<number>('focus_count');
+        if (currentCount === undefined) currentCount = 0;
 
-    async addFocusCount() {
-        try {
-            await addNumberFlow();
-            const newVal = await getNumberFlow();
-            AppStorage.setOrCreate("Number_Flow", newVal);
-            VibrateUtil.shortVibrate();
-            promptAction.showToast({ message: '倒计时结束！次数+1,休息一下再继续吧！' });
-        } catch {}
+        // 2. 写入新值 (大写 SetOrCreate)
+        AppStorage.SetOrCreate('focus_count', currentCount + 1);
+        VibrateUtil.shortVibrate();
+        //console.info(`[TimerDown] 写入成功: ${currentCount + 1}`);
+        promptAction.showToast({ message: '长休息结束了，继续专注吧!' });
     }
 
     build() {
         Column({ space: 40 }) {
-            FadeSlideItem({delayMs: 0}) {
-                Text('倒计时专注')
+            FadeSlideItem({delayMs: 0 }) {
+                Text('长休息')
                     .fontSize(32)
                     .fontWeight(FontWeight.Bold)
                     .fontColor('#0F4441')
@@ -110,11 +126,11 @@ struct TimerDown {
             ]
         })
         // .linearGradient({
-        //     angle: 160,
+        //     angle: 160, // 倾斜角度，更有动感
         //     colors: [
-        //         ['#ffe9eff5', 0.0],
-        //         ['#ffeef8ef', 0.5],
-        //         ['#ffd0f3d1', 1.0]
+        //         ['#ffe9eff5', 0.0], // 顶部：极淡的青蓝色（像天空）
+        //         ['#ffeef8ef', 0.5], // 中间：淡薄荷绿
+        //         ['#ffd0f3d1', 1.0]  // 底部：稍深的嫩绿
         //     ]
         // })
         .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
@@ -128,14 +144,26 @@ struct TimerDown {
                 if (this.remainSecond <= 0) {
                     this.stopTimer();
                     this.isRunning = false;
-                    this.addFocusCount().then(() => {
-                        this.breakCount --;
-                        if(this.breakCount === 0){
-                            router.replaceUrl({url: "pages/LongBreak"})
-                        }else {
-                            router.replaceUrl({ url: "pages/Sleep" });
+                    try {
+                        if(this.flowWays == 1){
+                            this.breakCount = 4
+                            router.replaceUrl({url: 'pages/TimerDown_20'})
                         }
-                    }).catch(() => {});
+                        if(this.flowWays == 2){
+                            this.breakCount = 4
+                            router.replaceUrl({url: 'pages/TimerDown'})
+                        }
+                        if(this.flowWays == 3){
+                            this.breakCount = 4
+                            router.replaceUrl({url: 'pages/TimerDown_30'})
+                        }
+                        if(this.flowWays == 4){
+                            this.breakCount = 2
+                            router.replaceUrl({url: 'pages/TimerDown_50'})
+                        }
+                    } catch (err) {
+                        console.error("跳转失败", JSON.stringify(err));
+                    }
                 }
             }, 1000);
         }
@@ -152,3 +180,4 @@ struct TimerDown {
         this.stopTimer();
     }
 }
+

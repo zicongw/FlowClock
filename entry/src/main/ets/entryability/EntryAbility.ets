@@ -56,11 +56,14 @@ import hilog from '@ohos.hilog';
 import window from '@ohos.window';
 import type Want from '@ohos.app.ability.Want';
 import type LaunchParam from '@ohos.app.ability.AbilityConstant';
+//import { AppStorage } from '@kit.ArkUI';
 
 export default class EntryAbility extends UIAbility {
     onCreate(want: Want, launchParam: LaunchParam.LaunchParam): void {
         hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
-
+        AppStorage.setOrCreate<number>("FlowBreak", 0);
+        AppStorage.setOrCreate<number>("FlowWays", 0);
+        AppStorage.setOrCreate<number>("Break_Count", 0);
         // ✅ 步骤1：在这里先检查并注册，越早越好
         // 如果磁盘里有值，这里不会做任何事；如果没有，就设为0
         if (!AppStorage.Has('focus_count')) {

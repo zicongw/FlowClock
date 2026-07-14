@@ -4,24 +4,23 @@ import { addNumberFlow, getNumberFlow } from '../common/Storage';
 import { FadeSlideItem } from './FadeSlideItem';
 import { VibrateUtil } from '../common/VibrateUtil';
 
-
 @Entry
 @Component
 struct TimerDown {
-    @State totalSecond: number = 25 * 60;
-    @State remainSecond: number = 25 * 60;
+    @State totalSecond: number = 20 * 60;
+    @State remainSecond: number = 20 * 60;
     @State isRunning: boolean = false;
     @StorageLink("BreakCount") breakCount: number = 0
     private timerId: number = -1;
     @State pageRefresh: number = 0
 
-    pad(num: number): string {
-        return num < 10 ? '0' + num : '' + num;
-    }
-
     async onPageShow() {
         // 变更状态，强制所有子组件重建，重新播放淡入动画
         this.pageRefresh += 1
+    }
+
+    pad(num: number): string {
+        return num < 10 ? '0' + num : '' + num;
     }
 
     async addFocusCount() {
@@ -36,12 +35,13 @@ struct TimerDown {
 
     build() {
         Column({ space: 40 }) {
-            FadeSlideItem({delayMs: 0}) {
+            FadeSlideItem({delayMs: 0 }) {
                 Text('倒计时专注')
                     .fontSize(32)
                     .fontWeight(FontWeight.Bold)
                     .fontColor('#0F4441')
             }
+
             FadeSlideItem({delayMs: 200}) {
                 Text(
                     `${this.pad(Math.floor(this.remainSecond / 3600))}:` +

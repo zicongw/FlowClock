@@ -61,20 +61,27 @@ struct Main {
             TabContent() {
                 Mine({ userNameFromMain: this.passedUserName })
             }
-            .tabBar(this.TabBarBuilder('我的', 1,  $r('app.media.userbar')))
+            .tabBar(this.TabBarBuilder('信息', 1,  $r('app.media.info')))
         }
         .onChange((index: number) => {
             this.currentIndex = index;
         })
-
         .linearGradient({
-            angle: 160,
+            angle: 0,
             colors: [
-                ['#ffe9eff5', 0.0], // 顶部：极淡的青蓝色（像天空）
-                ['#ffeef8ef', 0.5], // 中间：淡薄荷绿
-                ['#ffd0f3d1', 1.0]  // 底部：稍深的嫩绿
+                ['#ffc3cedb', 0.0],
+                ['#ffeeeff3', 1.0]
             ]
         })
+
+        // .linearGradient({
+        //     angle: 160,
+        //     colors: [
+        //         ['#ffe9eff5', 0.0], // 顶部：极淡的青蓝色（像天空）
+        //         ['#ffeef8ef', 0.5], // 中间：淡薄荷绿
+        //         ['#ffd0f3d1', 1.0]  // 底部：稍深的嫩绿
+        //     ]
+        // })
 
         .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
 
